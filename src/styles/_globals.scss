@@ -1,0 +1,462 @@
+$completed-opacity: 0.4;
+$item-hover-bg: #f5f5f5;
+$unit: 0.25em;
+$statusline-height: $unit * 10;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: white;
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/dot-grid.png");
+  background-attachment: fixed;
+  font-size: 12px;
+  font-family: sans-serif;
+  color: #222;
+  overflow: hidden;
+}
+
+body.font-sm {
+  font-size: 12px !important;
+}
+body.font-md {
+  font-size: 14px !important;
+
+  .card {
+    height: 450px !important;
+  }
+  .add-card-btn {
+    height: 450px !important;
+  }
+  .settings-modal {
+    width: 400px;
+  }
+}
+body.font-lg {
+  font-size: 16px !important;
+
+  .card {
+    height: 500px !important;
+  }
+  .add-card-btn {
+    height: 500px !important;
+  }
+  .settings-modal {
+    width: 450px;
+  }
+}
+body.font-xl {
+  font-size: 18px !important;
+
+  .card {
+    height: 540px !important;
+  }
+  .add-card-btn {
+    height: 540px !important;
+  }
+  .settings-modal {
+    width: 500px;
+  }
+}
+
+body.font-md {
+  .grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+    @media (max-width: 1000px) {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    @media (max-width: 860px) {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+}
+body.font-lg,
+body.font-xl {
+  .grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    @media (max-width: 1000px) {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    @media (max-width: 860px) {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+}
+
+button {
+  $bg-color: #222;
+  $color: white;
+
+  background: $bg-color;
+  color: $color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.33em;
+  border-radius: $unit;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #999;
+    color: $color;
+  }
+
+  &.inverted {
+    background: transparent;
+    color: $bg-color;
+
+    &:hover {
+      background: $bg-color;
+      color: $color;
+    }
+  }
+
+  &.danger {
+    background: red;
+  }
+}
+
+.dashboard {
+  height: calc(100vh - $statusline-height);
+  overflow-y: auto;
+}
+
+.grid {
+  margin: calc($unit * 2);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: calc($unit * 2);
+  grid-row-gap: calc($unit * 2);
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 860px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.add-card-btn {
+  height: 400px;
+  background: white;
+  border: 1px solid #d2d2d2;
+  border-radius: 0;
+  color: #a8a8a8;
+
+  &:hover {
+    background: white;
+    color: #a8a8a8;
+
+    text-decoration: underline;
+  }
+}
+
+.card {
+  $footer-height: $unit * 10;
+  $todos-space: calc($unit * 2);
+  $padding: calc($unit * 3);
+  $heading-container-height: $unit * 20;
+  $body-height: calc(100% - $heading-container-height - $footer-height);
+  $placeholder-height: calc(100% - $heading-container-height);
+
+  position: relative;
+  height: 400px;
+  background: white;
+  border: 1px solid #d2d2d2;
+
+  &__heading-container {
+    padding: $padding;
+    height: $heading-container-height;
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: calc($unit * 5);
+  }
+
+  &__body {
+    padding: $padding;
+    height: $body-height;
+    overflow-y: auto;
+
+    & > .todo + .todo {
+      margin-top: $todos-space;
+    }
+  }
+
+  &__title {
+    font-size: 1.1em;
+
+    &:hover {
+      background: $item-hover-bg;
+    }
+  }
+
+  &__controls {
+    position: relative;
+  }
+
+  &__footer {
+    width: 100%;
+    height: $footer-height;
+    border-top: 1px solid #d2d2d2;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: calc($unit * 2);
+    color: #a8a8a8;
+  }
+
+  &__tiny-stats {
+    display: flex;
+    align-items: center;
+
+    & > * {
+      margin-right: calc($unit * 2);
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    z-index: 10;
+    top: calc($unit * 8);
+    right: 0px;
+    background: white;
+    border: 1px solid #d2d2d2;
+    padding: calc($unit * 2);
+    border-radius: $unit;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+
+    & > * {
+      margin: calc($unit / 2) 0;
+    }
+
+    &-btn {
+      width: 100%;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      &-icon {
+        margin-right: calc($unit * 2);
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+      }
+    }
+  }
+
+  &__placeholder {
+    $color: #a8a8a8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: $placeholder-height;
+    color: $color;
+
+    &-icon {
+      color: $color;
+      font-size: calc($unit * 10);
+    }
+  }
+}
+
+.todo {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding: $unit;
+  border-radius: calc($unit / 2);
+
+  &:hover {
+    background: $item-hover-bg;
+  }
+
+  &__label {
+    width: 100%;
+    color: #222;
+  }
+
+  &__checkbox-symbol {
+    margin-right: calc($unit * 2);
+    font-size: 1.15em;
+  }
+
+  &__checkbox {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    display: none;
+
+    &:checked {
+      & + * + .todo__label {
+        text-decoration: line-through;
+        opacity: $completed-opacity;
+      }
+
+      & + * + * + .todo__delete-btn {
+        opacity: $completed-opacity !important;
+      }
+    }
+  }
+}
+.todo__checkbox:checked + .todo__checkbox-symbol {
+  opacity: $completed-opacity;
+}
+
+input[type="text"],
+select {
+  border: 1px solid #d2d2d2;
+  border-radius: $unit;
+  outline: none;
+  min-height: 25px;
+
+  &:active,
+  &:focus {
+    border: 1px solid #a8a8a8;
+  }
+}
+
+.todo-input {
+  margin: calc($unit * 2.5) 0;
+  width: 100%;
+}
+
+.queue {
+  padding: calc($unit * 2);
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: calc(100vh - $statusline-height);
+  width: 300px;
+  background: white;
+  border-left: 1px solid #d2d2d2;
+
+  &__title {
+    font-size: 1.1em;
+    margin-bottom: calc($unit * 2);
+  }
+}
+
+.statusline {
+  padding: calc($unit * 2);
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: $statusline-height;
+  background: white;
+  border-top: 1px solid #d2d2d2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .side {
+    display: flex;
+    align-items: center;
+  }
+
+  & .side > div + div {
+    margin-left: calc($unit * 3);
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+
+    & > * {
+      margin-right: calc($unit * 2);
+    }
+  }
+}
+
+.settings-modal {
+  $icon-bg-color: #222;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  max-height: 400px;
+  background: white;
+  border: 1px solid #d2d2d2;
+  border-radius: $unit;
+  padding: calc($unit * 3);
+
+  &__bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #d2d2d2;
+    opacity: 0.3;
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: calc($unit * 2);
+  }
+
+  &__body {
+    padding-top: calc($unit * 2);
+
+    & > * + * {
+      margin-top: calc($unit * 2);
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    margin-right: calc($unit * 2);
+    background: $icon-bg-color;
+    color: white;
+    width: auto;
+    height: auto;
+    padding: $unit;
+    border-radius: $unit;
+  }
+
+  @media (max-width: 500px) {
+    width: auto;
+    height: auto;
+  }
+}
