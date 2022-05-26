@@ -36,7 +36,7 @@ export default function TodosProvider({ children }: PropsWithChildren<{}>) {
     }),
     createTodo({
       cardId: "inbox-card",
-      text: "👌 No multiple nested menus. It's all layed out in front of you, just as it should be.",
+      text: "👌 No multiple nested menus. It's all laid out before you, just as it should be.",
     }),
     createTodo({
       cardId: "inbox-card",
