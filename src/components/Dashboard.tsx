@@ -3,6 +3,7 @@ import useFontSizeUpdater from "../hooks/useFontSizeSetting";
 import AddCardControl from "./AddCardControl";
 import Card from "./Card";
 import Grid from "./Grid";
+import Scratchpad from "./Scratchpad";
 import Statusline from "./Statusline";
 
 export default function Dashboard() {
@@ -13,6 +14,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <Grid>
+        <Scratchpad />
         {cards.map((card) => (
           <Card key={card.id} card={card} />
         ))}

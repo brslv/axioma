@@ -460,3 +460,32 @@ select {
     height: auto;
   }
 }
+
+.scratchpad {
+  $heading-height: calc($unit * 10);
+  $padding: calc($unit * 3);
+  $scratchpad-bg: #fffacd;
+  $border-color: #ffd700;
+
+  background: $scratchpad-bg;
+  border: 1px solid $border-color;
+  padding: $padding;
+
+  textarea {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: calc(100% - ($heading-height));
+    background: transparent;
+    resize: none;
+    opacity: 0.8;
+  }
+
+  &__heading {
+    height: $heading-height;
+  }
+
+  &__title {
+    font-size: 1.1em;
+  }
+}
