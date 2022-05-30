@@ -40,12 +40,12 @@ export default function TodoItem({ todo }: { todo: Todo }) {
       </div>
       <div className="todo__label">{todo.text}</div>
       {!shouldConfirmDelete && (
-        <button className="todo__delete-btn inverted" onClick={handleDelete}>
+        <button className="todo__delete-btn" onClick={handleDelete}>
           <IoTrash />
         </button>
       )}
       {shouldConfirmDelete && (
-        <button className="danger" onClick={handleConfirm}>
+        <button className="todo__delete-btn danger" onClick={handleConfirm}>
           <IoTrash />
         </button>
       )}
