@@ -22,3 +22,8 @@ export interface Card {
   title: string;
   accentColor?: CardAccentColor;
 }
+
+export enum DragDropTypes {
+  Card = "Card",
+  TodoItem = "TodoItem",
+}
