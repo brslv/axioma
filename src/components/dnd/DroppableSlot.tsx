@@ -12,7 +12,7 @@ interface DroppableSlotProps<T> {
   onDropRight?: (draggingCard: T, data: T) => void;
 }
 
-export default function DroppableSlot<T>({
+export default function DroppableSlot<T extends { id: string | number }>({
   children,
   data,
   onOver,
@@ -22,14 +22,18 @@ export default function DroppableSlot<T>({
   onDropLeft,
   onDropRight,
 }: PropsWithChildren<DroppableSlotProps<T>>) {
-  const [{ isOver }, drop] = useDrop<T, unknown, { isOver: boolean }>(() => ({
+  const [{ isOverSelf, isOver }, drop] = useDrop<
+    T,
+    unknown,
+    { isOverSelf: boolean; isOver: boolean }
+  >(() => ({
     accept: DragDropTypes.Card,
     drop: (draggingCard) => {
       onDrop && onDrop(draggingCard, data);
     },
     collect: (monitor) => ({
+      isOverSelf: monitor.getItem()?.id === data?.id,
       isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
     }),
   }));
 
@@ -44,7 +48,6 @@ export default function DroppableSlot<T>({
     },
     collect: (monitor) => ({
       isOverLeft: monitor.isOver(),
-      canDrop: monitor.canDrop(),
     }),
   }));
 
@@ -59,7 +62,6 @@ export default function DroppableSlot<T>({
     },
     collect: (monitor) => ({
       isOverRight: monitor.isOver(),
-      canDrop: monitor.canDrop(),
     }),
   }));
 
@@ -79,7 +81,7 @@ export default function DroppableSlot<T>({
     <div ref={drop} style={{ position: "relative" }}>
       {children}
 
-      {isOver ? (
+      {isOver && !isOverSelf ? (
         <>
           <div
             ref={dropLeft}
@@ -87,7 +89,6 @@ export default function DroppableSlot<T>({
               opacity: 0,
               position: "absolute",
               top: 0,
-              left: 0,
               width: "50%",
               height: "100%",
               background: isOverLeft ? "green" : "yellow",
@@ -98,7 +99,7 @@ export default function DroppableSlot<T>({
           ) : null}
         </>
       ) : null}
-      {isOver ? (
+      {isOver && !isOverSelf ? (
         <>
           <div
             ref={dropRight}

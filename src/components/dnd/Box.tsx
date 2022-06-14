@@ -3,13 +3,12 @@ import { memo } from "react";
 
 const styles: CSSProperties = {
   border: "1px dashed gray",
-  padding: "0.5rem 1rem",
+  padding: "2.5rem 3rem",
   cursor: "move",
 };
 
 export interface BoxProps {
   title: string;
-  yellow?: boolean;
   preview?: boolean;
 }
 
