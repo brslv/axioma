@@ -1,7 +1,7 @@
 {
-  "name": "wabisabi",
+  "name": "axioma",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
